@@ -1,5 +1,5 @@
 name: "9Router"
-version: "0.5.95-1"
+version: "0.5.119"
 slug: "9router"
 description: "OpenAI-compatible AI router with 3-tier fallback across 60+ providers"
 url: "https://9router.com"
