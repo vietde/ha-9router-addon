@@ -33,21 +33,8 @@ export NODE_OPTIONS="--max-old-space-size=${OPT_MEM}"
 
 chown -R node:node "$DATA" 2>/dev/null || true
 
-# Sidebar (ingress) launcher: a tiny static page served by busybox httpd (~1 MB RAM).
-# It opens the real dashboard on port 20128 inside the HA frame.
-mkdir -p /www
-cat > /www/index.html <<'HTML'
-<!doctype html><meta charset="utf-8"><title>9Router</title>
-<body style="font-family:sans-serif;background:#111;color:#eee;padding:2rem">
-<p>Opening 9Router&hellip;</p>
-<p><a id="l" target="_blank" style="color:#4fc3f7">Open in a new tab</a></p>
-<script>
-var u=location.protocol+'//'+location.hostname+':20128/dashboard';
-document.getElementById('l').href=u;
-if(location.protocol==='http:')location.replace(u);
-</script>
-HTML
-busybox httpd -p 8099 -h /www
+# Sidebar (ingress) launcher page (tiny node process, ~20 MB)
+node --max-old-space-size=16 /ingress.js &
 
 cd /app
 if [ -f custom-server.js ]; then ENTRY=custom-server.js; else ENTRY=server.js; fi
