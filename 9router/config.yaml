@@ -1,0 +1,30 @@
+name: "9Router"
+version: "0.5.95"
+slug: "9router"
+description: "OpenAI-compatible AI router with 3-tier fallback across 60+ providers"
+url: "https://9router.com"
+arch:
+  - aarch64
+  - amd64
+init: false
+startup: services
+boot: auto
+host_network: false
+ports:
+  20128/tcp: 20128
+ports_description:
+  20128/tcp: "Dashboard (/dashboard) and OpenAI-compatible API (/v1) on your LAN"
+webui: "http://[HOST]:[PORT:20128]/dashboard"
+watchdog: "http://[HOST]:[PORT:20128]/api/health"
+options:
+  initial_password: "123456"
+  require_api_key: true
+  enable_request_logs: false
+  base_url: ""
+  max_memory_mb: 256
+schema:
+  initial_password: password?
+  require_api_key: bool
+  enable_request_logs: bool
+  base_url: str?
+  max_memory_mb: int(96,2048)
