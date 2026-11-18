@@ -9,7 +9,7 @@ Runs the official `decolua/9router` image (same one you used on Debian/Pi).
 
 ## LAN access
 Port 20128 is published on all host interfaces. Check Configuration → Network that the port isn't blank.
-No ingress: the dashboard expects to be served from the root path. Don't forward this port to the internet.
+The sidebar entry is a launcher: it opens `http://<ha-host>:20128/dashboard` inside the HA frame (works when HA is opened over http). Over https the browser blocks it, so use the "Open in a new tab" link on that page. Full ingress isn't possible because the dashboard expects to be served from the root path. Don't forward this port to the internet.
 
 ## Options
 | Option | Default | Notes |
